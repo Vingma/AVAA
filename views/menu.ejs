@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PayHub — Menu</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #c9c9c9;
+        text-align: center;
+      }
+      .menu-container {
+        max-width: 400px;
+        margin: auto;
+        background: #ff8800be;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      h1 {
+        color: #fff;
+      }
+      .menu button {
+        display: block;
+        width: 100%;
+        margin: 10px 0;
+        padding: 12px;
+        border: none;
+        border-radius: 5px;
+        background: #fff;
+        color: #333;
+        cursor: pointer;
+      }
+      .menu button:hover {
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="menu-container">
+      <h1>PayHub</h1>
+      <p style="color:#fff">Select an option</p>
+      <div class="menu">
+        <button onclick="handleClick('Pay Services')">Pay Services</button>
+        <button onclick="handleClick('Make Transfers')">Make Transfers</button>
+        <button onclick="handleClick('Receive Money')">Receive Money</button>
+        <button onclick="handleClick('Results')">Results</button>
+        <button onclick="handleClick('Receips')">Receips</button>
+      </div>
+    </div>
+
+    <script>
+      function handleClick(option) {
+        switch(option) {
+          case 'Pay Services':
+            window.location.href = '/pay-services';
+            break;
+          case 'Make Transfers':
+            window.location.href = '/transferences';
+            break;
+          case 'Receive Money':
+            window.location.href = '/receive-money';
+            break;
+          case 'Results':
+            window.location.href = '/results';
+            break;
+          case 'Receips':
+            window.location.href = '/receipts';
+            break;
+          default:
+            alert('Selected: ' + option);
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,52 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>PayHub</title>
-    </head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #c9c9c9
-        }
-        .transferences {
-            max-width: 400px;
-            margin: auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 15px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            background-color: #ff8800be;
-            align-items: center;
-        }
-    </style>
-    <body>
-        <div class="transferences">
-            <h1>Transference</h1>
-            <input id="walletName" type="text" placeholder="Wallet Address Name" style="width: 80%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px;"><br>
-            <input id="name" type="text" placeholder="Name" style="width: 80%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px;"><br>
-            <input id="quantity" type="quantity" placeholder="Quantity" style="width: 80%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px;"><br>
-            <input id="message" type="text" placeholder="Message" style="width: 80%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px;"><br>
-            <button id="payBTN" style="width: 30%; padding: 10px; background-color: #804809be; color: white; border: none; border-radius: 3px; cursor: pointer;">Pay with Open Payments</button>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <title>PayHub - Transfers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #c9c9c9;
+    }
+    .transfers {
+      max-width: 400px;
+      margin: auto;
+      padding: 20px;
+      background-color: #ff8800be;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 60%;
+      padding: 12px;
+      background-color: #804809be;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #5c3509;
+    }
+    .summary {
+      margin-top: 15px;
+      background: #fff3e0;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="transfers">
+    <h1>Transfers</h1>
 
-        <script>
-            document.getElementById("payBTN").addEventListener("click", async () => {
-            const walletName = document.getElementById("walletName").value;
-            const amount = parseFloat(document.getElementById("quantity").value);
+    <input id="walletAddress" type="text" placeholder="Wallet Address Name"><br>
+    <input id="amount" type="number" placeholder="Amount" min="1"><br>
+    <input id="message" type="text" placeholder="Message (optional)"><br>
 
-            // Llamar al backend
-            const response = await fetch("/api/create-payment", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ walletName, amount })
-            });
+    <div class="summary" id="summary">
+      Enter details to see the summary.
+    </div>
 
-            const data = await response.json();
-            alert("Incoming Payment Created! URL: " + data.incomingPaymentUrl);
-            });
-        </script>
-    </body>
+    <button id="sendBTN">Confirm Transfer</button>
+    <button id="backBTN" onclick="goToMenu()">Back to Menu</button>
+  </div>
+
+  <script>
+    const walletInput = document.getElementById("walletAddress");
+    const amountInput = document.getElementById("amount");
+    const messageInput = document.getElementById("message");
+    const summaryDiv = document.getElementById("summary");
+    const sendBTN = document.getElementById("sendBTN");
+
+    function updateSummary() {
+      const wallet = walletInput.value.trim();
+      const amount = amountInput.value;
+
+      if (wallet && amount > 0) {
+        summaryDiv.textContent = `You will send $${amount} to wallet: ${wallet}.`;
+      } else {
+        summaryDiv.textContent = "Enter details to see the summary.";
+      }
+    }
+
+    walletInput.addEventListener("input", updateSummary);
+    amountInput.addEventListener("input", updateSummary);
+
+    sendBTN.addEventListener("click", async () => {
+      const walletAddress = walletInput.value.trim();
+      const amount = parseFloat(amountInput.value);
+
+      if (!walletAddress || isNaN(amount) || amount <= 0) {
+        alert("Please fill in all fields correctly.");
+        return;
+      }
+
+      // Call backend API
+      const response = await fetch("/api/create-payment", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ walletAddress, amount, message: messageInput.value })
+      });
+
+      const data = await response.json();
+      alert(`Transfer created: $${amount} to wallet ${walletAddress}.`);
+    });
+
+    function goToMenu() {
+      window.location.href = '/menu';
+    }
+  </script>
+</body>
 </html>

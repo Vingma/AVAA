@@ -1,0 +1,177 @@
+<body style="background-color: #FFFFBF;">
+  <h1 style="background-color: Lightblue;">Committee Transfers</h1>
+
+  <!-- Botón de regresar al menú -->
+  <div style="text-align:center; margin:10px;">
+    <button onclick="goToMenu()" style="padding:10px 20px; border:none; border-radius:5px; background-color:#804809be; color:white; cursor:pointer;">
+      Back to Menu
+    </button>
+  </div>
+
+  <p>Here you can consult the service payment tables.</p>
+
+  <table border="1">
+    <tr>
+      <th>Resident Name</th>
+      <th>
+        <div>Phone</div>
+        <div>Water</div>
+        <div>Electricity</div>
+      </th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Due Date</th>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>
+        <div>Phone</div>
+        <div>Water</div>
+        <div>Electricity</div>
+      </td>
+      <td>
+        <div>0</div>
+        <div>200</div>
+        <div>500</div>
+      </td>
+      <td>
+        <div>Paid</div>
+        <div>Pending</div>
+        <div>To pay</div>
+      </td>
+      <td>
+        <div>Sep 20, 2025</div>
+        <div>Sep 21, 2025</div>
+        <div>Sep 22, 2025</div>
+      </td>
+    </tr>
+    <tr>
+      <td>Mary</td>
+      <td>
+        <div>Phone</div>
+        <div>Water</div>
+        <div>Electricity</div>
+      </td>
+      <td>
+        <div>100</div>
+        <div>0</div>
+        <div>200</div>
+      </td>
+      <td>
+        <div>Pending</div>
+        <div>Paid</div>
+        <div>To pay</div>
+      </td>
+      <td>
+        <div>Sep 28, 2025</div>
+        <div>Sep 25, 2025</div>
+        <div>Sep 29, 2025</div>
+      </td>
+    </tr>
+  </table>
+
+  <p>Here you can consult the income table</p>
+  <table border="1">
+    <tr>
+      <th>Month</th>
+      <th>Remittances</th>
+      <th>Transfer</th>
+      <th>Cash Deposit</th>
+      <th>Donations</th>
+    </tr>
+    <tr>
+      <td>PayHub January 2025</td>
+      <td>10,000</td>
+      <td>30,000</td>
+      <td>25,000</td>
+      <td>5,000</td>
+    </tr>
+    <tr>
+      <td>PayHub February 2025</td>
+      <td>15,000</td>
+      <td>33,000</td>
+      <td>6,000</td>
+      <td>14,000</td>
+    </tr>
+  </table>
+
+  <p>Here you can consult the expenses table</p>
+  <table border="1">
+    <tr>
+      <th>Month</th>
+      <th>Residents</th>
+      <th>Service Payments</th>
+      <th>Community</th>
+      <th>Others</th>
+    </tr>
+    <tr>
+      <td>PayHub January 2025</td>
+      <td>30,000</td>
+      <td>25,000</td>
+      <td>10,000</td>
+      <td>5,000</td>
+    </tr>
+    <tr>
+      <td>PayHub February 2025</td>
+      <td>33,000</td>
+      <td>15,000</td>
+      <td>14,000</td>
+      <td>6,000</td>
+    </tr>
+  </table>
+
+  <p>Here you can consult the private residents’ expenses</p>
+  <table border="1">
+    <tr>
+      <th>Month</th>
+      <th>Payment To</th>
+      <th>Amount</th>
+      <th>Reason</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td>January</td>
+      <td>Alonso</td>
+      <td>20,000</td>
+      <td>Remittance</td>
+      <td>Jan 10, 2025</td>
+    </tr>
+    <tr>
+      <td>January</td>
+      <td>Miguel</td>
+      <td>10,000</td>
+      <td>Family Transfer</td>
+      <td>Jan 12, 2025</td>
+    </tr>
+  </table>
+
+  <table border="1">
+    <tr>
+      <th>Month</th>
+      <th>Payment To</th>
+      <th>Amount</th>
+      <th>Reason</th>
+      <th>Date</th>
+    </tr>
+    <tr>
+      <td>February</td>
+      <td>Alonso</td>
+      <td>8,000</td>
+      <td>Family Transfer</td>
+      <td>Feb 20, 2025</td>
+    </tr>
+    <tr>
+      <td>February</td>
+      <td>Miguel</td>
+      <td>25,000</td>
+      <td>Remittance</td>
+      <td>Feb 15, 2025</td>
+    </tr>
+  </table>
+
+  <script>
+    function goToMenu() {
+      window.location.href = '/menu';
+    }
+  </script>
+</body>

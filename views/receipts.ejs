@@ -1,0 +1,69 @@
+<body style="background-color: #FFFFBF;">
+  <h1 style="background-color: Lightblue;">Operation Receipts</h1>
+
+  <!-- Botón de regresar al menú -->
+  <div style="text-align:center; margin:10px;">
+    <button onclick="goToMenu()" style="padding:10px 20px; border:none; border-radius:5px; background-color:#804809be; color:white; cursor:pointer;">
+      Back to Menu
+    </button>
+  </div>
+
+  <p>Here you can consult all operation receipts for transfers, payments, and donations.</p>
+
+  <table border="1">
+    <tr>
+      <th>Date</th>
+      <th>Operation Type</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Amount</th>
+      <th>Reason</th>
+    </tr>
+    <tr>
+      <td>Sep 10, 2025</td>
+      <td>Payment</td>
+      <td>John Smith</td>
+      <td>Water Company</td>
+      <td>200</td>
+      <td>Monthly water bill</td>
+    </tr>
+    <tr>
+      <td>Sep 12, 2025</td>
+      <td>Payment</td>
+      <td>Mary Johnson</td>
+      <td>Electricity Company</td>
+      <td>500</td>
+      <td>Electricity bill</td>
+    </tr>
+    <tr>
+      <td>Sep 15, 2025</td>
+      <td>Donation</td>
+      <td>External Donor</td>
+      <td>Community Fund</td>
+      <td>1000</td>
+      <td>Community support</td>
+    </tr>
+    <tr>
+      <td>Sep 18, 2025</td>
+      <td>Payment</td>
+      <td>Carlos Ruiz</td>
+      <td>Internet Provider</td>
+      <td>300</td>
+      <td>Monthly internet bill</td>
+    </tr>
+    <tr>
+      <td>Sep 20, 2025</td>
+      <td>Transfer</td>
+      <td>Community Fund</td>
+      <td>Committee</td>
+      <td>500</td>
+      <td>Cash transfer to committee</td>
+    </tr>
+  </table>
+
+  <script>
+    function goToMenu() {
+      window.location.href = '/menu';
+    }
+  </script>
+</body>

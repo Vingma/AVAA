@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PayHub — Donations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #c9c9c9;
+        }
+        .transferences {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ff8800be;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        button {
+            display: block;       /* fuerza a que cada botón ocupe su propia línea */
+            width: 60%;           /* ancho deseado */
+            margin: 10px auto;    /* separación y centrado */
+            padding: 10px;
+            background-color: #804809be;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #633807;
+        }
+    </style>
+</head>
+<body>
+    <div class="transferences">
+        <h1>Donation</h1>
+
+        <label for="recipientType">Recipient Type:</label><br>
+        <select id="recipientType">
+            <option value="resident">Resident</option>
+            <option value="community">Community</option>
+        </select><br>
+
+        <div id="residentSelection">
+            <select id="residentName">
+                <option value="john">John Smith</option>
+                <option value="mary">Mary Johnson</option>
+                <option value="carlos">Carlos Ruiz</option>
+            </select><br>
+        </div>
+
+        <input id="walletaddress" type="text" placeholder="Wallet Address Name" /><br>
+        <input id="amount" type="number" placeholder="Amount" /><br>
+        <input id="message" type="text" placeholder="Message" /><br>
+        <button id="payBTN">Pay with Open Payments</button>
+        <button id="backBtn" onclick="goHome()">Back to Home</button>
+    </div>
+
+    <script>
+        const recipientTypeSelect = document.getElementById('recipientType');
+        const residentDiv = document.getElementById('residentSelection');
+
+        recipientTypeSelect.addEventListener('change', () => {
+            if(recipientTypeSelect.value === 'resident') {
+                residentDiv.style.display = 'block';
+            } else {
+                residentDiv.style.display = 'none';
+            }
+        });
+
+        document.getElementById("payBTN").addEventListener("click", async () => {
+            const type = recipientTypeSelect.value;
+            const name = type === 'resident' ? document.getElementById('residentName').value : 'community';
+            const amount = parseFloat(document.getElementById('amount').value);
+            const message = document.getElementById('message').value;
+
+            if(isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            alert(`Result Created Payment:\nRecipient Type: ${type}\nRecipient: ${name}\nAmount: $${amount}\nMessage: ${message}`);
+        });
+
+        function goHome() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>

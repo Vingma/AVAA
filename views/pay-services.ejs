@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PayHub — Service Payments</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background: #c9c9c9;
+        text-align: center;
+      }
+      .container {
+        max-width: 400px;
+        margin: auto;
+        background: #ff8800be;
+        padding: 20px;
+        border-radius: 10px;
+      }
+      h1, h2 {
+        color: #fff;
+      }
+      select, input, button {
+        width: 80%; 
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      input[readonly] {
+        background-color: #eee;
+      }
+      button {
+        background: #fff;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #eee;
+      }
+      .hidden {
+        display: none;
+      }
+      #message {
+        color: #fff;
+        margin-top: 10px;
+        font-weight: bold;
+      }
+      #backBtn {
+        margin-top: 15px;
+        background-color: #804809be;
+        color: white;
+        border-radius: 5px;
+      }
+      #backBtn:hover {
+        background-color: #633807;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>PayHub</h1>
+      <h2>Select Resident</h2>
+      <div id="step1">
+        <select id="resident" onchange="fillReferences()">
+          <option value="">-- Select a resident --</option>
+          <option value="john">John Smith</option>
+          <option value="mary">Mary Johnson</option>
+          <option value="carlos">Carlos Ruiz</option>
+        </select>
+        <button onclick="nextStep()">Next</button>
+      </div>
+
+      <div id="step2" class="hidden">
+        <h2>Basic Services</h2>
+        <select id="service" onchange="updateReference()">
+          <option value="">-- Select a service --</option>
+          <option value="water">Water - $200</option>
+          <option value="electricity">Electricity - $500</option>
+          <option value="internet">Internet - $350</option>
+        </select>
+        <input type="text" id="reference" placeholder="Reference number" readonly />
+        <input type="number" id="amount" placeholder="Amount to pay" />
+        <button onclick="pay()">Pay</button>
+        <div id="message" class="hidden">Processing payment...</div>
+      </div>
+
+      <!-- Back to Menu button -->
+      <button id="backBtn" onclick="goToMenu()">Back to Menu</button>
+    </div>
+
+    <script>
+      const referenceMap = {
+        john: { water: 'W123', electricity: 'E123', internet: 'I123' },
+        mary: { water: 'W234', electricity: 'E234', internet: 'I234' },
+        carlos: { water: 'W345', electricity: 'E345', internet: 'I345' }
+      };
+
+      function nextStep() {
+        const resident = document.getElementById('resident').value;
+        if (!resident) {
+          alert('Please select a resident');
+          return;
+        }
+        document.getElementById('step1').classList.add('hidden');
+        document.getElementById('step2').classList.remove('hidden');
+        updateReference();
+      }
+
+      function fillReferences() {
+        const resident = document.getElementById('resident').value;
+        const serviceSelect = document.getElementById('service');
+        const referenceInput = document.getElementById('reference');
+        if (resident && referenceMap[resident]) {
+          const firstService = serviceSelect.value || Object.keys(referenceMap[resident])[0];
+          serviceSelect.value = firstService;
+          referenceInput.value = referenceMap[resident][firstService];
+        } else {
+          referenceInput.value = '';
+        }
+      }
+
+      function updateReference() {
+        const resident = document.getElementById('resident').value;
+        const service = document.getElementById('service').value;
+        const refInput = document.getElementById('reference');
+        if (resident && service && referenceMap[resident][service]) {
+          refInput.value = referenceMap[resident][service];
+        } else {
+          refInput.value = '';
+        }
+      }
+
+      function pay() {
+        const resident = document.getElementById('resident').value;
+        const service = document.getElementById('service').value;
+        const reference = document.getElementById('reference').value;
+        const amount = document.getElementById('amount').value;
+
+        if (!service || !reference || !amount) {
+          alert('Please complete all fields');
+          return;
+        }
+
+        const messageDiv = document.getElementById('message');
+        messageDiv.textContent = 'Processing payment...';
+        messageDiv.classList.remove('hidden');
+
+        // Simulate payment delay
+        setTimeout(() => {
+          messageDiv.classList.add('hidden');
+          alert(`Payment created!\nResident: ${resident}\nService: ${service}\nReference: ${reference}\nAmount: $${amount}`);
+        }, 2000);
+      }
+
+      function goToMenu() {
+        window.location.href = '/menu';
+      }
+    </script>
+  </body>
+</html>
